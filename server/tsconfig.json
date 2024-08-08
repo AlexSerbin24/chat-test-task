@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "ES2020", // Целевая версия JavaScript
+        "module": "commonjs", // Используемый модульный формат
+        "outDir": "./dist", 
+        "rootDir": "./src",
+        "esModuleInterop": true,
+    },
+    "include": [
+        "src/**/*.ts"
+    ], 
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+}

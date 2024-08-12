@@ -1,6 +1,3 @@
-// src/types/ChatTypes.ts
-import { Types } from 'mongoose';
-
 export interface CreateChat {
   firstName: string;
   lastName: string;
@@ -8,6 +5,6 @@ export interface CreateChat {
 }
 
 export interface UpdateChat {
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
 }

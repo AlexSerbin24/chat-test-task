@@ -4,8 +4,7 @@ import authMiddleware from '../middlewares/auth-middleware';
 
 const router = Router();
 
-router.post('/', authMiddleware, MessageController.sendMessage);
-
+router.put("/:id", authMiddleware,MessageController.updateMessage)
 
 
 export default router;

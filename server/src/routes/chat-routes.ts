@@ -10,6 +10,8 @@ router.get('/all/:userId', authMiddleware, ChatController.getChats);
 
 router.put('/:id', authMiddleware, ChatController.updateChat);
 
+router.put('/lastread/:id', authMiddleware, ChatController.updateChatLastRead)
+
 router.get('/:id', authMiddleware, ChatController.getChatById);
 
 router.delete('/:id', authMiddleware, ChatController.removeChat);

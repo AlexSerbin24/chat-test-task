@@ -1,12 +1,11 @@
 import mongoose from 'mongoose';
-import Message from './message';
 
 const chatSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   firstName: {type:String, required:true},
-  lastName: {type:String, required:true},
+  lastName: {type:String},
   messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
-  lastReadTimestamps: { type: Map, of: Date, default: () => new Map() }, // For handling notifications
+  lastRead:  { type: Date, default: Date.now }, 
 });
 
 const Chat = mongoose.model('Chat', chatSchema);

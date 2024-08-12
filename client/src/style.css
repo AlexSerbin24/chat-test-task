@@ -1,0 +1,362 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+/*App*/
+
+.app {
+    display: flex;
+    height: 100vh;
+}
+
+/*Buttons*/
+.default-btn,
+.red-btn,
+.modal-form button {
+    background-color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    padding: 10px 5px;
+    cursor: pointer;
+}
+
+
+.default-btn,
+.modal-form button{
+    color: #2ab5ff;
+}
+
+.red-btn{
+    color: rgb(184, 44, 44);
+}
+
+.default-btn:hover,
+.red-btn:hover,
+.modal-form button:hover {
+    opacity: 0.6;
+}
+
+/*Sidebar*/
+.sidebar {
+    height: 100%;
+    flex: 0 0 40%;
+    border-right: 1px solid lightgrey;
+}
+
+/*UserProfile*/
+.user-profile {
+    padding: 25px 20px;
+    background-color: #F5F5F5;
+    border-bottom: 1px solid lightgrey;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.search-container{
+    position: relative;
+}
+
+.search-icon{
+    position: absolute;
+    top: 12px;
+    left: 10px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px 0 12px 35px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+
+.search-container input::placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: rgb(114, 112, 112);
+}
+
+.login-btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Центрирование по горизонтали */
+    align-items: center;
+    /* Центрирование по вертикали */
+}
+
+
+/*ChatList*/
+.chat-list {
+    height: 85%;
+}
+
+.chat-list h2 {
+    color: #62b6d7;
+    font-weight: normal;
+    margin-bottom: 20px;
+    padding: 15px 25px;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.chat-item:hover {
+    background-color: #f5f5f5;
+}
+
+
+.chat-info {
+    margin-left: 15px;
+}
+
+.chat-info h3 {
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin: 0 0 2px 0;
+    color: rgb(114, 112, 112);
+}
+
+.chat-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgb(169, 169, 169)
+}
+
+.last-message-date {
+    margin-left: auto;
+    font-size: 0.92rem;
+    color: rgb(114, 112, 112);
+}
+
+.notification{
+    background-color: #2ab5ff;
+    color: white;
+    border-radius: 100px;
+    padding: 5px 10px;
+}
+
+/*MainContent*/
+.main-content {
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5F5;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 25px 35px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.chat-header h2 {
+    margin: 0;
+    margin-left: 15px;
+
+    color: rgb(92, 91, 91);
+}
+
+
+.chat-messages {
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex: 1;
+    background-color: rgb(252, 249, 249);
+    border-bottom: 1px solid #ddd;
+}
+
+.message {
+    display: flex;
+}
+
+.message.message-user {
+    margin-left: auto;
+}
+
+.message.message-user:hover .edit-message-btn {
+    display:inline;
+}
+
+
+.message-body {
+    margin-left: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-message-btn{
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    left: -30px;
+}
+
+.edit-message-btn:hover{
+    opacity: 0.6;
+}
+
+.message-content {
+    padding: 10px 35px;
+    border-radius: 50px;
+    margin-bottom: 5px;
+}
+
+.message-bot .message-content {
+    background-color: #3A4153;
+    color: rgb(209, 205, 205);
+}
+
+.message-user .message-content {
+    background-color: #cecbcb;
+    color: rgb(88, 87, 87);
+}
+
+.message-content p {
+    margin: 0;
+}
+
+.message-timestamp {
+    position: relative;
+    font-size: 12px;
+    color: gray;
+}
+
+.message-user .message-timestamp {
+    margin-left: auto;
+}
+
+.message-input {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-input input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    box-sizing: border-box;
+}
+
+.search-container input::placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: rgb(114, 112, 112);
+}
+
+
+
+/*ModalForms*/
+.modal-form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.modal-form input::placeholder {
+    font-family: 'Roboto', sans-serif;
+    color: rgb(114, 112, 112);
+    font-size: 18px;
+}
+
+.modal-form button {
+    padding: 15px 20px;
+    font-size: 16px;
+}
+
+
+/*ModalConfirm*/
+.modal-confirm button{
+    padding: 12px 10px;
+    font-size: 16px;
+    
+}
+
+
+.error {
+    color: #f27272;
+    margin: 0;
+}
+
+/*Avatar*/
+.avatar {
+    display: inline-block;
+}
+
+.avatar img {
+    width: 40px;
+    height: 40px;
+}
+
+
+.avatar img {
+    border-radius: 50%;
+}
+
+
+/*Modal*/
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 8px;
+    width: 500px;
+    max-width: 90%;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 16px;
+}

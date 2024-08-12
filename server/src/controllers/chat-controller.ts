@@ -40,6 +40,24 @@ class ChatController {
     }
   }
 
+  static async updateChatLastRead(req: AuthRequest, res: Response) {
+    try {
+      const checkChat = await ChatService.getChatById(req.params.id);
+
+      console.log(req.body)
+      
+      if (!isUserOwner(req.userId, checkChat.user.toString())) {
+        return res.status(403).json({ message: 'Forbidden: You can only access your own chats' });
+      }
+
+      await ChatService.updateChatLastRead(req.params.id, new Date());
+
+      res.sendStatus(204);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+
   static async removeChat(req: AuthRequest, res: Response) {
     try {
 
@@ -49,11 +67,9 @@ class ChatController {
         return res.status(403).json({ message: 'Forbidden: You can only access your own chats' });
       }
 
-      const chat = await ChatService.removeChat(req.params.id);
-      if (!chat) {
-        return res.status(404).json({ message: 'Chat not found' });
-      }
-      res.json({ message: 'Chat removed successfully' });
+      await ChatService.removeChat(req.params.id);
+
+      res.sendStatus(204);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }

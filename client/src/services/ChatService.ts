@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import Chat from '../types/chat';
 
-const API_URL = 'http://localhost:5000/api/chats';
+const API_URL = `${process.env.REACT_APP_API_URL}/api/chats`;
 
 class ChatService {
     static async getUserChats(userId: string) {

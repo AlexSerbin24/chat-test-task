@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { AuthResponse, LoginData, RegisterData } from '../types/userData';
 
-const API_URL = 'http://localhost:5000/api/users';
+
+
+const API_URL = `${process.env.REACT_APP_API_URL}/api/users`;
 
 class AuthService {
     static async login(data: LoginData) {

@@ -11,6 +11,7 @@ import { connectSocket, getSocket } from './sockets/socket';
 import ChatService from './services/ChatService';
 
 function App() {
+
   const { setChats } = useChats()
   const { selectedChat, setSelectedChat } = useSelectedChat()
   const [isLoginOpen, setLoginOpen] = useState(false);

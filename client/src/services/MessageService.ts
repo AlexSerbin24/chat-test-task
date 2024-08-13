@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import Message from '../types/message';
 
-const API_URL = 'http://localhost:5000/api/messages';
+const API_URL = `${process.env.REACT_APP_API_URL}/api/messages`;
 
 
 class MessageService {

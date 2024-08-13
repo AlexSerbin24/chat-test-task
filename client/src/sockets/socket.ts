@@ -4,8 +4,9 @@ import { io, Socket } from 'socket.io-client';
 let socket: Socket | null = null;
 
 export const connectSocket = () => {
+  const apiUrl = process.env.REACT_APP_API_URL as string;
   if (!socket) {
-    socket = io('http://localhost:5000', {
+    socket = io(apiUrl, {
       withCredentials: true, 
     });
 

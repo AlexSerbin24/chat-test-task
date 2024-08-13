@@ -29,13 +29,13 @@ class ChatController {
         return res.status(403).json({ message: 'Forbidden: You can only access your own chats' });
       }
 
-
-
       const chat = await ChatService.updateChat(req.params.id, req.body);
       if (!chat) {
         return res.status(404).json({ message: 'Chat not found' });
       }
+
       res.json(chat);
+      
     } catch (error) {
       next(error);
     }
@@ -44,8 +44,6 @@ class ChatController {
   static async updateChatLastRead(req: AuthRequest, res: Response, next:NextFunction) {
     try {
       const checkChat = await ChatService.getChatById(req.params.id);
-
-      console.log(req.body)
       
       if (!isUserOwner(req.userId, checkChat.user.toString())) {
         return res.status(403).json({ message: 'Forbidden: You can only access your own chats' });

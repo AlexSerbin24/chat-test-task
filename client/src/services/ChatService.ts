@@ -41,6 +41,7 @@ class ChatService {
 
 
     static async updateChat(chatId: string, firstName: string, lastName: string) {
+        console.log(API_URL)
         try {
             const token = localStorage.getItem('token');
 
@@ -53,7 +54,7 @@ class ChatService {
                     },
                 }
             );
-
+            console.log(response.data)
             return response.data;
         } catch (error: any) {
             if (error instanceof AxiosError) {

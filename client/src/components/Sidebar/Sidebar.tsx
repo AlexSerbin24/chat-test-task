@@ -6,6 +6,7 @@ import CreateOrUpdateChatModal from '../Modals/ChatModals/CreateOrUpdateChatModa
 import DeleteChatModal from '../Modals/ChatModals/DeleteChatModal'
 import useChats from '../../hooks/useChats'
 import Message from '../../types/message'
+import useSelectedChat from '../../hooks/useSelectedChat'
 
 
 type Props = {
@@ -20,6 +21,7 @@ export default function Sidebar({ openLoginModal, openRegiserModal }: Props) {
     const [chatIdToRemove, setChatIdToRemove] = useState<string>("")
     const [chatNameInput, setChatNameInput] = useState('');
     const { chats, setChats } = useChats();
+    const{setSelectedChat} = useSelectedChat();
     const [filteredChats, setFilteredChats] = useState<Chat[]>([]);
 
     const filterChats = (input: string) => {
@@ -49,6 +51,13 @@ export default function Sidebar({ openLoginModal, openRegiserModal }: Props) {
                 chat.id === updatedChat.id ? updatedChat : chat
             )
         );
+
+        setSelectedChat((prevChat) => {
+            if (prevChat && prevChat.id === updatedChat.id) {
+              return { ...prevChat,firstName:updatedChat.firstName, lastName:updatedChat.lastName };
+            }
+            return prevChat;
+          });
     };
 
     const removeChat = (chatId: string) => {

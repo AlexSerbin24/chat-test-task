@@ -31,7 +31,7 @@ class UserService {
     const user = new User({ name, surname, email, hashPassword: hashedPassword });
     await user.save();
 
-    UserService.createPreDefinedChats(user._id.toString());
+    await UserService.createPreDefinedChats(user._id.toString());
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     return { token, id: user._id.toString() };

@@ -41,7 +41,10 @@ class ChatService {
   }
 
   static async updateChat(chatId: string, updateData: UpdateChat) {
-    const updatedChat = await Chat.findByIdAndUpdate(chatId, updateData, { new: true }).lean();
+    const updatedChat = await Chat.findByIdAndUpdate(chatId, updateData, { new: true }).populate({
+      path: 'messages',
+      model: 'Message',
+    }).lean();
 
     if (!updatedChat) {
       throw ApiError.NotFound('Chat not found');

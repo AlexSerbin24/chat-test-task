@@ -120,6 +120,7 @@ body {
 
 .chat-info {
     margin-left: 15px;
+    width: 60%;
 }
 
 .chat-info h3 {

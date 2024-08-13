@@ -57,6 +57,7 @@ const ChatItem: React.FC<Props> = ({ chat, onUpdate, onDelete }) => {
         setSelectedChat({ ...chat, lastRead: newDate });
     };
 
+
     return (
         <div
             key={chat.id}
@@ -67,7 +68,8 @@ const ChatItem: React.FC<Props> = ({ chat, onUpdate, onDelete }) => {
             <div className="chat-info">
                 <h3>{chat.firstName} {chat.lastName}</h3>
                 <p>
-                    {chat.messages.length > 0 && chat.messages[chat.messages.length - 1].text}
+                    {chat.messages.length > 0 && chat.messages[chat.messages.length - 1].text.substring(0, 30)}
+                    {chat.messages.length > 0 && chat.messages[chat.messages.length - 1].text.length > 30 ? "..." : ""}
                 </p>
 
                 <div style={{ display: "flex", gap: 5 }}>
@@ -84,7 +86,7 @@ const ChatItem: React.FC<Props> = ({ chat, onUpdate, onDelete }) => {
             </div>
             {
                 notificationCount !== 0 &&
-                <div style={{display:"flex", justifyContent:"center", flex:1}}>
+                <div style={{ display: "flex", justifyContent: "center", flex: 1 }}>
                     <div className='notification'>{notificationCount}</div>
                 </div>
             }

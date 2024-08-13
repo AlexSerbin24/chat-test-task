@@ -32,7 +32,7 @@ class AuthService {
 
     static async loginWithGoogle(tokenId: string): Promise<any> {
         try {
-            const response = await axios.post('http://localhost:5000/api/users/google', { token:tokenId });
+            const response = await axios.post(`${API_URL}/google`, { token:tokenId });
             const { token, id } = response.data;
             localStorage.setItem("token", token)
             return { id };

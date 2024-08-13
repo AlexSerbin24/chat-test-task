@@ -62,6 +62,13 @@ export default function Sidebar({ openLoginModal, openRegiserModal }: Props) {
 
     const removeChat = (chatId: string) => {
         setChats((prevChats) => prevChats.filter(chat => chat.id !== chatId));
+
+        setSelectedChat((prevChat) => {
+            if (prevChat && prevChat.id === chatId) {
+              return null;
+            }
+            return prevChat;
+          });
     }
 
 

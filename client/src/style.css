@@ -245,8 +245,8 @@ body {
 .message-input {
     padding: 25px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
 .message-input input {
@@ -255,6 +255,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 18px;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .search-container input::placeholder {

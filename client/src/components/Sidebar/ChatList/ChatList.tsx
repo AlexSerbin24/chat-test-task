@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Chat from '../../../types/chat';
 import { useUser } from '../../../hooks/useUser';
 import ChatService from '../../../services/ChatService';
-import useSelectedChat from '../../../hooks/useSelectedChat';
 import useChats from '../../../hooks/useChats';
 import ChatItem from './ChatItem'; // Импорт нового компонента
 
@@ -15,22 +14,26 @@ type Props = {
 export default function ChatList({ filteredChats, handleUpdateChatBtnClick, handleDeleteChatBtnClick }: Props) {
   const { chats, setChats } = useChats();
   const [chatLoading, setChatLoading] = useState(false);
+  const [error, setError] = useState("")
   const { user } = useUser();
 
   useEffect(() => {
     if (user) {
-      setChatLoading(true);
-      ChatService.getUserChats(user.id).then((data) => {
-        setChats(data);
-        setChatLoading(false);
-      });
+        setChatLoading(true);
+        ChatService.getUserChats(user.id).then((data) => {
+          setChats(data);
+          setChatLoading(false);
+        }).catch(error=>setError("Error while receiving chats"))
+
     }
   }, [user]);
 
 
   return (
     <div className="chat-list">
-      {
+      {error === "" ?
+
+
         !user
           ?
           <h2>Firstly, you should login or register</h2>
@@ -54,6 +57,12 @@ export default function ChatList({ filteredChats, handleUpdateChatBtnClick, hand
                   />
                 ))}
               </>
+        :
+        <div>
+          <p className='error' style={{textAlign:"center"}}>
+            {error}
+          </p>
+        </div>
       }
     </div>
   );

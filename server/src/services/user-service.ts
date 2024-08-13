@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { RegisterUser, LoginUser } from '../types/user-types';
 import ChatService from './chat-service';
 import { OAuth2Client } from 'google-auth-library';
+import ApiError from '../types/error-types';
 
 
 class UserService {
@@ -23,7 +24,7 @@ class UserService {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      throw new Error('User with this email already exists');
+      throw ApiError.BadRequest('User with this email already exists');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -41,14 +42,14 @@ class UserService {
     const { email, password } = userData;
     const user = await User.findOne({ email });
     if (!user) {
-      throw new Error('Invalid email');
+      throw ApiError.BadRequest('Invalid email');
     }
 
 
     const isPasswordValid = await bcrypt.compare(password, user.hashPassword)
 
     if (!isPasswordValid) {
-      throw new Error('Invalid password');
+      throw ApiError.BadRequest('Invalid password');
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });

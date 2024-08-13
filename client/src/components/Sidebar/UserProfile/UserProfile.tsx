@@ -52,7 +52,7 @@ export default function UserProfile({ chatNameInput, handleChatInputChange, open
                         <>
                             <button className='default-btn' onClick={handleCreateChatBtnClick}>Add chat</button>
                             <button className={isRandomMessagesActive ? "red-btn" : "default-btn"} onClick={handleToogleRandomMessagesBtn}>
-                                {isRandomMessagesActive ? 'Stop Random Messages' : 'Start Random Messages'}
+                                {isRandomMessagesActive ? 'Stop random messages' : 'Start random messages'}
                             </button>
                         </>
                     }

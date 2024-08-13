@@ -13,6 +13,7 @@ interface Props {
 
 export default function MessageInput({ updateMessage, chatId, editMode = false, editMessageId, initialMessage = '' }: Props) {
 
+  const [error, setError] = useState("")
   const [message, setMessage] = useState(initialMessage);
 
   useEffect(() => {
@@ -28,17 +29,23 @@ export default function MessageInput({ updateMessage, chatId, editMode = false, 
   const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
+      setError('')
       if (!message) return
 
       if (editMode && editMessageId) {
-        const updatedMessage = await MessageService.updateMessage(message, editMessageId);
-        updateMessage(updatedMessage);
+        try {
+          const updatedMessage = await MessageService.updateMessage(message, editMessageId);
+          updateMessage(updatedMessage);
+          setMessage('');
+        } catch (error) {
+          setError("Error while updating message")
+        }
       } else {
         const socket = getSocket();
         socket.emit("sendMessage", message, chatId)
+        setMessage('');
       }
 
-      setMessage('');
     }
   };
 
@@ -51,6 +58,7 @@ export default function MessageInput({ updateMessage, chatId, editMode = false, 
         onChange={handleMessageChange}
         onKeyDown={handleKeyDown}
       />
+         {error && <p className='error'>{error}</p>}
     </div>
   );
 }

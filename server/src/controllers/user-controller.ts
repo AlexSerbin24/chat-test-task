@@ -1,32 +1,32 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import UserService from '../services/user-service';
 
 class UserController {
-  static async register(req: Request, res: Response) {
+  static async register(req: Request, res: Response, next:NextFunction) {
     try {
       const result = await UserService.register(req.body);
       res.json(result);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error);
     }
   }
 
-  static async login(req: Request, res: Response) {
+  static async login(req: Request, res: Response, next:NextFunction) {
     try {
       const result = await UserService.login(req.body);
       res.json(result);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error);
     }
   }
 
-  static async googleLogin(req: Request, res: Response) {
+  static async googleLogin(req: Request, res: Response, next:NextFunction) {
     const { token } = req.body;
     try {
       const result = await UserService.google(token);
       res.json(result);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error)
     }
   }
 

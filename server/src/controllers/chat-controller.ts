@@ -1,11 +1,12 @@
-import { Response } from 'express';
+import { NextFunction, Response } from 'express';
 import ChatService from '../services/chat-service';
 import { AuthRequest } from '../types/request-types';
 import { isUserOwner } from '../utils/access-control';
+import ApiError from '../types/error-types';
 
 class ChatController {
 
-  static async createChat(req: AuthRequest, res: Response) {
+  static async createChat(req: AuthRequest, res: Response, next:NextFunction) {
     try {
 
       if (!isUserOwner(req.userId, req.body.userId)) {
@@ -15,12 +16,12 @@ class ChatController {
       const chat = await ChatService.createChat(req.body);
       res.status(201).json(chat);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error)
     }
   }
 
 
-  static async updateChat(req: AuthRequest, res: Response) {
+  static async updateChat(req: AuthRequest, res: Response, next:NextFunction) {
     try {
       const checkChat = await ChatService.getChatById(req.params.id);
 
@@ -36,11 +37,11 @@ class ChatController {
       }
       res.json(chat);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error);
     }
   }
 
-  static async updateChatLastRead(req: AuthRequest, res: Response) {
+  static async updateChatLastRead(req: AuthRequest, res: Response, next:NextFunction) {
     try {
       const checkChat = await ChatService.getChatById(req.params.id);
 
@@ -54,11 +55,11 @@ class ChatController {
 
       res.sendStatus(204);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error)
     }
   }
 
-  static async removeChat(req: AuthRequest, res: Response) {
+  static async removeChat(req: AuthRequest, res: Response, next:NextFunction) {
     try {
 
       const checkChat = await ChatService.getChatById(req.params.id);
@@ -71,12 +72,12 @@ class ChatController {
 
       res.sendStatus(204);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error);
     }
   }
 
 
-  static async getChats(req: AuthRequest, res: Response) {
+  static async getChats(req: AuthRequest, res: Response, next:NextFunction) {
     try {
       if (!isUserOwner(req.userId, req.params.userId)) {
         return res.status(403).json({ message: 'Forbidden: You can only access your own chats' });
@@ -85,11 +86,11 @@ class ChatController {
       const chats = await ChatService.getChats(req.params.userId);
       res.json(chats);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error)
     }
   }
 
-  static async getChatById(req: AuthRequest, res: Response) {
+  static async getChatById(req: AuthRequest, res: Response, next:NextFunction) {
     try {
       const chat = await ChatService.getChatById(req.params.id);
       if (!chat) {
@@ -103,7 +104,7 @@ class ChatController {
 
       res.json(chat);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      next(error);
     }
   }
 }

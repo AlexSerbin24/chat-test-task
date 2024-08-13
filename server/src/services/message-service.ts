@@ -1,6 +1,7 @@
 import Message from '../models/message';
 import Chat from '../models/chat';
 import axios from 'axios';
+import ApiError from '../types/error-types';
 
 class MessageService {
 
@@ -8,7 +9,7 @@ class MessageService {
         const message = await Message.findById(messageId).lean();
     
         if (!message) {
-          throw new Error('Message not found');
+          throw ApiError.NotFound('Message not found');
         }
     
         return { ...message, id: message._id, _id: undefined, __v: undefined };
@@ -36,7 +37,9 @@ class MessageService {
         // const response = await axios.get('https://api.quotable.io/random');
         // return await response.data.content;
 
-        return "Response"
+        const response = await axios.get("https://quote-generator-api-six.vercel.app/api/quotes/random");
+
+        return response.data.quote;
 
     }
 
@@ -44,10 +47,10 @@ class MessageService {
     static async updateMessage(messageId:string, newText:string){
 
         const updatedMessage = await Message.findByIdAndUpdate(messageId, {text:newText}, { new: true }).lean();
-        console.log(updatedMessage)
+        
         if (!updatedMessage) {
-          throw new Error('Message not found');
-        }
+            throw ApiError.NotFound('Message not found');
+          }
     
         return { ...updatedMessage, id: updatedMessage._id, _id: undefined, __v: undefined };
     }

@@ -15,14 +15,8 @@ class ChatService {
 
             return response.data;
         } catch (error: any) {
-            if (error instanceof AxiosError) {
-                const axiosError = error as AxiosError;
-                console.error('Error fetching user chats:', axiosError.message);
-                throw axiosError;
-            } else {
-                console.error('Unexpected error:', error);
-                throw error;
-            }
+            console.log(error.response.data.message)
+            throw new Error(error.response.data.message);
         }
     }
 
@@ -39,14 +33,8 @@ class ChatService {
 
             return response.data;
         } catch (error: any) {
-            if (error instanceof AxiosError) {
-                const axiosError = error as AxiosError;
-                console.error('Error creating new chat:', axiosError.message);
-                throw axiosError;
-            } else {
-                console.error('Unexpected error:', error);
-                throw error;
-            }
+            console.log(error.response.data.message)
+            throw new Error(error.response.data.message);
         }
 
     }
@@ -73,8 +61,8 @@ class ChatService {
                 console.error('Error updating chat:', axiosError.message);
                 throw axiosError;
             } else {
-                console.error('Unexpected error:', error);
-                throw error;
+                console.log(error.response.data.message)
+                throw new Error(error.response.data.message);
             }
         }
     }
@@ -94,14 +82,8 @@ class ChatService {
 
             return true;
         } catch (error: any) {
-            if (error instanceof AxiosError) {
-                const axiosError = error as AxiosError;
-                console.error('Error updating chat:', axiosError.message);
-                throw axiosError;
-            } else {
-                console.error('Unexpected error:', error);
-                throw error;
-            }
+            console.log(error.response.data.message)
+            throw new Error(error.response.data.message);
         }
     }
 
@@ -121,14 +103,8 @@ class ChatService {
             const {lastRead} = response.data;
             return lastRead;
         } catch (error: any) {
-            if (error instanceof AxiosError) {
-                const axiosError = error as AxiosError;
-                console.error('Error updating chat last read:', axiosError.message);
-                throw axiosError;
-            } else {
-                console.error('Unexpected error:', error);
-                throw error;
-            }
+            console.log(error.response.data.message)
+            throw new Error(error.response.data.message);
         }
     }
 }

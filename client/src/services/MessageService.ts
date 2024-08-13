@@ -15,14 +15,8 @@ class MessageService {
             });
             return response.data;
         } catch (error: any) {
-            if (error instanceof AxiosError) {
-                const axiosError = error as AxiosError;
-                console.error('Error updating message:', axiosError.message);
-                throw axiosError;
-            } else {
-                console.error('Unexpected error:', error);
-                throw error;
-            }
+            console.log(error.response.data.message)
+            throw new Error(error.response.data.message);
 
         }
     }

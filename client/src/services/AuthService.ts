@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { AuthResponse, LoginData, RegisterData } from '../types/userData';
 
 const API_URL = 'http://localhost:5000/api/users';
@@ -11,8 +11,8 @@ class AuthService {
             localStorage.setItem("token", token)
             return { id };
         } catch (error: any) {
-            console.log(error)
-            throw new Error(error.response?.data?.message || 'Login failed');
+            console.log(error.response.data.message)
+            throw new Error(error.response.data.message);
         }
     }
 
@@ -23,8 +23,8 @@ class AuthService {
             localStorage.setItem("token", token)
             return { id };
         } catch (error: any) {
-            console.log(error)
-            throw new Error(error.response?.data?.message || 'Registration failed');
+            console.log(error.response.data.message)
+            throw new Error(error.response.data.message);
         }
     }
 
@@ -34,11 +34,11 @@ class AuthService {
             const { token, id } = response.data;
             localStorage.setItem("token", token)
             return { id };
-        } catch (error) {
-            console.error('Error logging in with Google', error);
-            throw error;
+        } catch (error:any) {
+            console.log(error.response.data.message)
+            throw new Error(error.response.data.message);
         }
     }
 }
 
-export default AuthService
+export default AuthService;

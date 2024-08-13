@@ -2,7 +2,6 @@ import { Server, Socket } from 'socket.io';
 import MessageService from '../services/message-service';
 import ChatService from '../services/chat-service';
 
-// Функция для обработки отправки сообщения
 async function handleSendMessage(socket: Socket, text: string, chatId: string) {
   try {
     const newMessage = await MessageService.sendMessage(chatId, text, true);

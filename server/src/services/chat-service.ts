@@ -1,6 +1,7 @@
 import Chat from '../models/chat';
 import { CreateChat, UpdateChat } from '../types/chat-types';
 import Message from '../models/message';
+import ApiError from '../types/error-types';
 
 class ChatService {
   static async getRandomChatId(userId: string) {
@@ -33,7 +34,7 @@ class ChatService {
     const updatedChat = await Chat.findByIdAndUpdate(chatId, { lastRead: newDate }).lean();
 
     if (!updatedChat) {
-      throw new Error('Chat not found');
+      throw ApiError.NotFound('Chat not found');
     }
 
     return { ...updatedChat, id: updatedChat._id, _id: undefined, __v: undefined };
@@ -43,7 +44,7 @@ class ChatService {
     const updatedChat = await Chat.findByIdAndUpdate(chatId, updateData, { new: true }).lean();
 
     if (!updatedChat) {
-      throw new Error('Chat not found');
+      throw ApiError.NotFound('Chat not found');
     }
 
     return { ...updatedChat, id: updatedChat._id, _id: undefined, __v: undefined };
@@ -53,7 +54,7 @@ class ChatService {
     const chat = await Chat.findById(chatId);
 
     if (!chat) {
-      throw new Error('Chat not found');
+      throw ApiError.NotFound('Chat not found');
     }
 
     await Message.deleteMany({ chat: chatId });
@@ -94,7 +95,7 @@ class ChatService {
 
 
     if (!chat) {
-      throw new Error('Chat not found');
+      throw ApiError.NotFound('Chat not found');
     }
 
     return { ...chat, id: chat._id, _id: undefined, __v: undefined };

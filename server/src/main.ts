@@ -5,9 +5,8 @@ import dotenv from 'dotenv';
 import cors from "cors";
 import http from 'http';
 import { Server } from 'socket.io';
-import ChatService from './services/chat-service';
-import MessageService from './services/message-service';
 import { setupSocketHandlers } from './socketHandlers/socketHandlers';
+import { apiErrorMiddleware } from './middlewares/error-middleware';
 
 dotenv.config();
 
@@ -24,6 +23,7 @@ app.use(cors({
 
 
 app.use('/api', routes);
+app.use(apiErrorMiddleware);
 
 const PORT = process.env.PORT || 5000;
 

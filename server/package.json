@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "tsc && copyfiles .env dist",
+    "build": "tsc",
     "start": "npm run build && node dist/main.js",
     "dev": "nodemon"
   },

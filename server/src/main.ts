@@ -25,6 +25,10 @@ app.use(cors({
 app.use('/api', routes);
 app.use(apiErrorMiddleware);
 
+
+app.use('/',(req,res)=> res.send("Server is running")
+)
+
 const PORT = process.env.PORT || 5000;
 
 const server = http.createServer(app);
